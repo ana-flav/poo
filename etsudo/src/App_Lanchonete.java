@@ -6,9 +6,8 @@ public class App_Lanchonete {
     public static void main(String[] args) {
         int index = 0;
         int flag = 0;
-        ArrayList <Pizza> pizzas = new ArrayList<Pizza>();
-        ArrayList <Salgadinho> salgados = new ArrayList<Salgadinho>();
-        ArrayList <Lanche> lanches = new ArrayList<Lanche>();
+        ArrayList <Prato> pratos = new ArrayList<Prato>();
+        
         Pedido pedido = new Pedido();
         Scanner sc = new Scanner(System.in);
 
@@ -32,7 +31,7 @@ public class App_Lanchonete {
                 String borda = sc.nextLine();
 
                 Pizza p = new Pizza(Date.valueOf("2023-06-22"), 1.0, molho, recheio, borda);
-                pizzas.add(p);
+                pratos.add(p);
 
             }else{
                 if(tipo.equals("lanche")){
@@ -46,7 +45,7 @@ public class App_Lanchonete {
                     String pao = sc.nextLine();
 
                     Lanche l = new Lanche(molho, recheio, pao, Date.valueOf("2023-06-22"), 1.0);
-                    lanches.add(l);
+                    pratos.add(l);
                 }else{
                     if(tipo.equals("salgado")){
                         System.out.println("Qual é o molho que vc deseja?");
@@ -59,7 +58,7 @@ public class App_Lanchonete {
                         String tipoSalgado = sc.nextLine();
 
                         Salgadinho s = new Salgadinho(molho, recheio, tipoSalgado, Date.valueOf("2023-06-22"), 1.0);
-                        salgados.add(s);
+                        pratos.add(s);
 
                     }else{
                         System.out.println("Não existe esse tipo, certifique de que você escolheu entre pizza, lanche ou salgadinho");
@@ -72,23 +71,10 @@ public class App_Lanchonete {
              tipo = "";
         }
 
-        for(Pizza p: pizzas){
-            System.out.println(""+p.getBorda());
-            pedido.setItensConsumidos(p, index);
-            System.out.println(""+p.getPreco());
-            index++;
-        }
-
-        for(Salgadinho s: salgados){
-            System.out.println(""+s.getPreco());
-            pedido.setItensConsumidos(s, index);
-            index++;
-        }
-
-        for(Lanche l: lanches){
-            pedido.setItensConsumidos(l, index);
-            index++;
-        }
+      for(Prato p: pratos){
+        pedido.setItensConsumidos(p, index);
+        index++;
+      }
        pedido.imprimirFatura();
     }
 
